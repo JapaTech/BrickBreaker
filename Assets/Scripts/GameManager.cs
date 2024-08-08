@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-1)]
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; set; }
@@ -9,10 +11,10 @@ public class GameManager : MonoBehaviour
     private int score;
 
     [SerializeField] private int startHealth;
-    [SerializeField] private Ball ball;
-    [SerializeField] private Player player;
 
     private int health;
+
+    public Action OnLoseHealth;
 
     private void Awake()
     {
@@ -40,16 +42,12 @@ public class GameManager : MonoBehaviour
     public void TakeDamage()
     {
         health--;
+        OnLoseHealth?.Invoke();
 
         if(health <= 0)
         {
             health = 0;
             Death();
-        }
-        else
-        {
-            player.ResetPlayer();
-            ball.ResetBall();
         }
     }
 

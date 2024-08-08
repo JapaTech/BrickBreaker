@@ -14,6 +14,17 @@ public class Ball : MonoBehaviour
         startPos = tr.position;
     }
 
+    private void OnEnable()
+    {
+        GameManager.Instance.OnLoseHealth += ResetBall;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.OnLoseHealth -= ResetBall;
+        
+    }
+
     void Start()
     {
         Invoke(nameof(AddRandomTrajectory), 1f);
@@ -27,6 +38,9 @@ public class Ball : MonoBehaviour
 
     public void ResetBall()
     {
+        Debug.Log("Reset");
+        rb.velocity = Vector2.zero;
+        AddRandomTrajectory();
         tr.position = startPos;
     }
 
