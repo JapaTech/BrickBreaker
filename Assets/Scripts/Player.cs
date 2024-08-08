@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     
     Rigidbody2D rb;
     Transform tr;
+    Vector3 posInicial;
 
     [SerializeField] private float speed = 5f;
     private float inputValue;
@@ -19,6 +20,8 @@ public class Player : MonoBehaviour
     {
         playerInput = new PlayerInput();
         rb = GetComponent<Rigidbody2D>();
+        tr = transform;
+        posInicial = tr.position;
     }
 
     private void OnEnable()
@@ -29,7 +32,6 @@ public class Player : MonoBehaviour
     private void Update()
     {
         inputValue = playerInput.Player.Move.ReadValue<float>();
-        
     }
 
     private void FixedUpdate()
@@ -37,6 +39,11 @@ public class Player : MonoBehaviour
         movement.x = inputValue;
         movement.y = 0;
         rb.velocity = movement * speed;
+    }
+
+    public void ResetPlayer()
+    {
+        tr.position = posInicial;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

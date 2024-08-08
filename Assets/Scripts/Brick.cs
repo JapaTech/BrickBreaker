@@ -4,13 +4,7 @@ using UnityEngine;
 public class Brick : MonoBehaviour
 {
     [SerializeField] private int health = 1;
-    public static Action OnDeath;
-
-    private void Death()
-    {
-        OnDeath?.Invoke();
-        gameObject.SetActive(false);
-    }
+    [SerializeField] private int points = 100;
 
     private void TakeDamage()
     {
@@ -21,6 +15,12 @@ public class Brick : MonoBehaviour
             health = 0;
             Death();
         }
+    }
+
+    private void Death()
+    {
+        GameManager.Instance.UpdateScore(points);
+        gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
