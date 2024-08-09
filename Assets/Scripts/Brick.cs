@@ -4,7 +4,7 @@ using UnityEngine;
 public class Brick : MonoBehaviour
 {
     [SerializeField] private int health = 1;
-    [SerializeField] private int points = 100;
+    [field: SerializeField] public int points { get; private set; } = 100;
 
     private void TakeDamage()
     {
@@ -19,7 +19,7 @@ public class Brick : MonoBehaviour
 
     private void Death()
     {
-        GameManager.Instance.UpdateScore(points);
+        GameManager.Instance.BrickDestroyed(this);
         gameObject.SetActive(false);
     }
 

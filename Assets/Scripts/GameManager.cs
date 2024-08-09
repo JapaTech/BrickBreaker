@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     public Action OnLoseHealth;
 
+    private List<Brick> bricks = new List<Brick>();
+
     private void Awake()
     {
         if(Instance !=null && Instance != this)
@@ -26,15 +27,28 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+
     }
 
     private void Start()
     {
+        Brick[] b = FindObjectsByType<Brick>(FindObjectsSortMode.None);
+        bricks.AddRange(b);
         score = 0;
         health = startHealth;
     }
 
-    public void UpdateScore(int value)
+    public void BrickDestroyed(Brick b)
+    {
+        UpdateScore(b.points);
+        bricks.Remove(b);
+        if(bricks.Count == 0)
+        {
+            Win();
+        }
+    }
+
+    private void UpdateScore(int value)
     {
         score += value;
     }
@@ -49,6 +63,11 @@ public class GameManager : MonoBehaviour
             health = 0;
             Death();
         }
+    }
+
+    private void Win()
+    {
+        Debug.Log("Win");
     }
 
     private void Death()

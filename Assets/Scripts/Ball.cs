@@ -33,12 +33,11 @@ public class Ball : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = rb.velocity.normalized * speed;
-        Debug.Log(rb.velocity);
+        //Debug.Log(rb.velocity);
     }
 
     public void ResetBall()
     {
-        Debug.Log("Reset");
         rb.velocity = Vector2.zero;
         AddRandomTrajectory();
         tr.position = startPos;
