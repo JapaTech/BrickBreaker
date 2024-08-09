@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 [DefaultExecutionOrder(-1)]
 public class GameManager : MonoBehaviour
@@ -73,6 +74,14 @@ public class GameManager : MonoBehaviour
     private void Death()
     {
         
+    }
+
+    public void WriteScore()
+    {
+        string filePath = Application.persistentDataPath + "\\score.txt";
+        string texto = "Score: 100";
+        
+        File.WriteAllText(filePath, texto);
     }
 
 }
