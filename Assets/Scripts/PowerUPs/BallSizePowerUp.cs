@@ -23,7 +23,4 @@ public class BallSizePowerUp : IPowerUp
     {
         ball.transform.localScale = startSize;
     }
-
-
-    
 }

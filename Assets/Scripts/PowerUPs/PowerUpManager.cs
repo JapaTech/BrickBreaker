@@ -50,7 +50,7 @@ public class PowerUpManager : MonoBehaviour
 
     public void BallSizePowerUp()
     {
-        ActivePowerUp(ballSizePowerUp)
+        ActivePowerUp(ballSizePowerUp);
     }
 
     private void ActivePowerUp(IPowerUp powerUPCommand)
