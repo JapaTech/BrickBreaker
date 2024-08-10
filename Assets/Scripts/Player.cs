@@ -10,7 +10,9 @@ public class Player : MonoBehaviour
     Transform tr;
     Vector3 posInicial;
 
-    [SerializeField] private float speed = 5f;
+    private int invertControls = 1;
+
+    [field: SerializeField] public float Speed { get; set; } = 5f;
     private float inputValue;
     private Vector2 movement;
 
@@ -22,6 +24,11 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         tr = transform;
         posInicial = tr.position;
+    }
+
+    private void Start()
+    {
+        
     }
 
     private void OnEnable()
@@ -45,13 +52,19 @@ public class Player : MonoBehaviour
     {
         movement.x = inputValue;
         movement.y = 0;
-        rb.velocity = movement * speed;
+        rb.velocity = movement * Speed * invertControls;
     }
 
     public void ResetPlayer()
     {
         tr.position = posInicial;
     }
+
+    public void InvertControls(bool invert)
+    {
+        invertControls = invert ? 1 : -1;
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

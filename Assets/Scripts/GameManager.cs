@@ -6,7 +6,6 @@ using System.IO;
 [DefaultExecutionOrder(-1)]
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; set; }
 
     private int score;
 
@@ -17,6 +16,7 @@ public class GameManager : MonoBehaviour
     public Action OnLoseHealth;
 
     private List<Brick> bricks = new List<Brick>();
+    public static GameManager Instance { get; set; }
 
     private void Awake()
     {
