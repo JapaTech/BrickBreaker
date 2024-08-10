@@ -9,7 +9,7 @@ public class PowerUpManager : MonoBehaviour
 
     public static PowerUpManager Instance { get; set; }
 
-    public bool isPowerUPActive { get; private set; }
+    public bool IsPowerUPActive { get; private set; }
 
     [SerializeField] private float powerUpDuration = 30f;
 
@@ -55,10 +55,10 @@ public class PowerUpManager : MonoBehaviour
 
     private void ActivePowerUp(IPowerUp powerUPCommand)
     {
-        if (isPowerUPActive)
+        if (IsPowerUPActive)
             return;
 
-        isPowerUPActive = true;
+        IsPowerUPActive = true;
         actualPowerUp = powerUPCommand;
         actualPowerUp.Active();
         StartCoroutine(DeactivePowerUp());
@@ -68,7 +68,7 @@ public class PowerUpManager : MonoBehaviour
     {
         yield return new WaitForSeconds(powerUpDuration);
         actualPowerUp.Deactivate();
-        isPowerUPActive = false;
+        IsPowerUPActive = false;
     }
 
 }
