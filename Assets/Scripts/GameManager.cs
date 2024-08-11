@@ -8,7 +8,7 @@ using System.IO;
 public class GameManager : MonoBehaviour
 {
 
-    private int score;
+    public int Score { get; private set; }
 
     [SerializeField] private UIManager uiManager;
 
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Initialize();
-        score = 0;
+        Score = 0;
     }
 
     private void Initialize()
@@ -96,8 +96,8 @@ public class GameManager : MonoBehaviour
 
     private void UpdateScore(int value)
     {
-        score += value;
-        uiManager.UpdateScore(score);
+        Score += value;
+        uiManager.UpdateScore(Score);
     }
 
     public void TakeDamage()
