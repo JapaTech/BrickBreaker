@@ -27,7 +27,7 @@ public class Ball : MonoBehaviour
 
     void Start()
     {
-        Invoke(nameof(AddRandomTrajectory), 1f);
+        Invoke(nameof(AddRandomTrajectory), 2f);
     }
 
     private void FixedUpdate()
@@ -45,8 +45,21 @@ public class Ball : MonoBehaviour
 
     private void AddRandomTrajectory()
     {
-        Vector2 force = new Vector2(Random.Range(-1f, 1f), -1f);
+        Vector2 force = new Vector2(Random.Range(-0.5f, 0.5f), -1f);
 
         rb.AddForce(force.normalized * speed, ForceMode2D.Impulse);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(rb.velocity.y == 0)
+        {
+            if (collision.transform.CompareTag("Wall"))
+            {
+                Vector2 force = new Vector2(0, Random.Range(Random.Range(-0.5f, -0.25f), Random.Range(0.25f, 0.5f)));
+
+                rb.AddForce(force.normalized, ForceMode2D.Impulse);
+            }
+        }   
     }
 }

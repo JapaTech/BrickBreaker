@@ -4,17 +4,33 @@ using UnityEngine;
 public class Brick : MonoBehaviour
 {
     [SerializeField] private int health = 1;
-    [field: SerializeField] public int points { get; private set; } = 100;
+    [SerializeField] private SpriteRenderer actualSprite;
+    [SerializeField] private Sprite[] spritesHealth;
 
-    private void TakeDamage()
+    [field: SerializeField] public int Points { get; private set; } = 100;
+
+
+    private void Start()
     {
-        health--;
+        ChangeSprite();
+    }
+
+    private void TakeDamage(int damage)
+    {
+        health -= damage;
+
 
         if(health <= 0)
         {
             health = 0;
             Death();
         }
+        ChangeSprite();
+    }
+
+    private void ChangeSprite()
+    {
+        actualSprite.sprite = spritesHealth[health - 1];
     }
 
     private void Death()
@@ -27,7 +43,7 @@ public class Brick : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ball"))
         {
-            TakeDamage();
+            TakeDamage(1);
         }
     }
 }

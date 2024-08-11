@@ -59,6 +59,8 @@ public class GameManager : MonoBehaviour
     private void Initialize()
     {
         Health = maxHealth;
+        uiManager.UpdateHealth(maxHealth);
+        uiManager.UpdateScore(Score);
         Brick[] b = FindObjectsByType<Brick>(FindObjectsSortMode.None);
         bricks.Clear();
         bricks.AddRange(b);
@@ -86,7 +88,7 @@ public class GameManager : MonoBehaviour
 
     public void BrickDestroyed(Brick b)
     {
-        UpdateScore(b.points);
+        UpdateScore(b.Points);
         bricks.Remove(b);
         if(bricks.Count == 0)
         {
@@ -104,7 +106,7 @@ public class GameManager : MonoBehaviour
     {
         Health--;
         OnLoseHealth?.Invoke();
-        uiManager.UpdateHealth(Health, maxHealth);
+        uiManager.UpdateHealth(Health);
 
         if(Health <= 0)
         {
