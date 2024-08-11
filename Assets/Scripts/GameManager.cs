@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public int Score { get; private set; }
 
     [SerializeField] private UIManager uiManager;
+    [SerializeField] private AudioSource backgroundMusic;
 
     [SerializeField] private int startHealth;
     [SerializeField] private int maxHealth;
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -102,16 +104,17 @@ public class GameManager : MonoBehaviour
         uiManager.UpdateScore(Score);
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
-        Health--;
+        Health -= damage;
         OnLoseHealth?.Invoke();
-        uiManager.UpdateHealth(Health);
 
         if(Health <= 0)
         {
             Death();
+            return;
         }
+        uiManager.UpdateHealth(Health);
         
     }
 

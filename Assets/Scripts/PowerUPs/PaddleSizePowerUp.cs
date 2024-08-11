@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class PaddleSizePowerUp : MonoBehaviour, IPowerUp
+public class PaddleSizePowerUp : IPowerUp
 {
     private float newWidth;
     private Player player;

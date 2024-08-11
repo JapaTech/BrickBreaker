@@ -34,13 +34,12 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         playerInput.Player.Enable();
-        GameManager.Instance.OnLoseHealth += ResetPlayer;
+        //GameManager.Instance.OnLoseHealth += ResetPlayer;
     }
 
     private void OnDisable()
     {
-        GameManager.Instance.OnLoseHealth -= ResetPlayer;
-        
+        //GameManager.Instance.OnLoseHealth -= ResetPlayer;
     }
 
     private void Update()

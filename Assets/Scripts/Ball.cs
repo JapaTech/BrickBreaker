@@ -27,7 +27,7 @@ public class Ball : MonoBehaviour
 
     void Start()
     {
-        Invoke(nameof(AddRandomTrajectory), 2f);
+        Invoke(nameof(AddRandomTrajectory), 1.5f);
     }
 
     private void FixedUpdate()
@@ -39,7 +39,7 @@ public class Ball : MonoBehaviour
     public void ResetBall()
     {
         rb.velocity = Vector2.zero;
-        AddRandomTrajectory();
+        Invoke(nameof(AddRandomTrajectory), 2f);
         tr.position = startPos;
     }
 

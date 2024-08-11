@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 3, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 952801139521302108}
@@ -130,8 +130,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40606cd883dd4634f86560048c865c6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
-  <points>k__BackingField: 100
+  health: 5
+  actualSprite: {fileID: 1067803361090178076}
+  spritesHealth:
+  - {fileID: 21300000, guid: 362b48b435ca16840aef5995a5eed472, type: 3}
+  - {fileID: 21300000, guid: 7605ffc625457d94789d476d1e631f24, type: 3}
+  - {fileID: 21300000, guid: 707802fc9ece32d428d2c7f298c6dc13, type: 3}
+  - {fileID: 21300000, guid: f0996ece01a48c74291a3e405fa3702f, type: 3}
+  - {fileID: 21300000, guid: 4354c05ef62992f4f91b05e0da37f262, type: 3}
+  <Points>k__BackingField: 100
 --- !u!61 &7220190313595325548
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -175,5 +182,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3205912, y: 0.67502975}
+  m_Size: {x: 1.944046, y: 0.67502975}
   m_EdgeRadius: 0

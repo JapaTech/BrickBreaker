@@ -19,12 +19,13 @@ public class Brick : MonoBehaviour
     {
         health -= damage;
 
-
         if(health <= 0)
         {
             health = 0;
             Death();
+            return;
         }
+
         ChangeSprite();
     }
 
