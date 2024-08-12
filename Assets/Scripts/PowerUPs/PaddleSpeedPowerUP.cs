@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class PaddleSpeedCommand : IPowerUp
+public class PaddleSpeedPowerUP : IPowerUp
 {
     private float speed;
     private Player player;
     private float startSpeed;
 
-    public PaddleSpeedCommand(float speed, Player player)
+    public PaddleSpeedPowerUP(float speed, Player player)
     {
         this.speed = speed;
         this.player = player;

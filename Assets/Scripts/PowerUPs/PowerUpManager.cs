@@ -11,13 +11,21 @@ public class PowerUpManager : MonoBehaviour
 
     public bool IsPowerUPActive { get; private set; }
 
+    private bool powerUPonScreen;
+
     [SerializeField] private float powerUpDuration = 30f;
+
+    [SerializeField] private float newWidth;
+    [SerializeField] private float newPlayerSpeed;
+    [SerializeField] private float newBallSize;
 
     IPowerUp actualPowerUp;
 
     PaddleSizePowerUp paddleSizePowerUp;
-    PaddleSpeedCommand paddleSpeedPowerUp;
+    PaddleSpeedPowerUP paddleSpeedPowerUp;
     BallSizePowerUp ballSizePowerUp;
+
+    [SerializeField] PowerUPItem[] powerUPsToSpawn;
 
     private void Awake()
     {
@@ -33,14 +41,19 @@ public class PowerUpManager : MonoBehaviour
     }
     private void Start()
     {
-        paddleSizePowerUp = new PaddleSizePowerUp(1.2f, player);
-        paddleSpeedPowerUp = new PaddleSpeedCommand(8f, player);
-        ballSizePowerUp = new BallSizePowerUp(1.5f, ball);
+        paddleSizePowerUp = new PaddleSizePowerUp(newWidth, player);
+        paddleSpeedPowerUp = new PaddleSpeedPowerUP(newPlayerSpeed, player);
+        ballSizePowerUp = new BallSizePowerUp(newBallSize, ball);
+    }
+
+    public void SpawnPowerUp(Vector3 pos)
+    {       
+        PowerUPItem newPowerUP = Instantiate(powerUPsToSpawn[Random.Range(0, powerUPsToSpawn.Length)], pos, Quaternion.identity);
     }
 
     public void SizePowerUP()
     {
-        ActivePowerUp(paddleSpeedPowerUp);
+        ActivePowerUp(paddleSizePowerUp);
     }
 
     public void SpeedPowerUp()
@@ -53,10 +66,13 @@ public class PowerUpManager : MonoBehaviour
         ActivePowerUp(ballSizePowerUp);
     }
 
-    private void ActivePowerUp(IPowerUp powerUPCommand)
+    public void ActivePowerUp(IPowerUp powerUPCommand)
     {
         if (IsPowerUPActive)
-            return;
+        {
+            StopCoroutine(DeactivePowerUp());
+            actualPowerUp.Deactivate();
+        }
 
         IsPowerUPActive = true;
         actualPowerUp = powerUPCommand;
