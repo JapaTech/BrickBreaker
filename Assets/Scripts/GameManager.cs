@@ -15,7 +15,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private int startHealth;
     [SerializeField] private int maxHealth;
-    
+
+    public bool WinGame { get; private set; }
+
     [field: SerializeField]
     private int health;
     public int Health
@@ -60,10 +62,12 @@ public class GameManager : MonoBehaviour
 
     private void Initialize()
     {
+        WinGame = false;
         Health = maxHealth;
+        uiManager.nextLevelPannel.SetActive(false);
         uiManager.UpdateHealth(maxHealth);
         uiManager.UpdateScore(Score);
-        Brick[] b = FindObjectsByType<Brick>(FindObjectsSortMode.None);
+        Brick[] b = FindObjectsByType<Brick>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         bricks.Clear();
         bricks.AddRange(b);
     }
@@ -74,12 +78,13 @@ public class GameManager : MonoBehaviour
 
         if (level > NumberOfLevels)
         {
-
+            WinGame = true;
             SceneManager.LoadScene("GameOver");
         }
 
         SceneManager.sceneLoaded += OnLevelLoaded;
         SceneManager.LoadScene($"Level{level}");
+        PauseManager.Instance.Unpause();
     }
 
     private void OnLevelLoaded(Scene scene, LoadSceneMode mode)
@@ -120,7 +125,9 @@ public class GameManager : MonoBehaviour
 
     private void Win()
     {
+        Debug.Log("win");
         uiManager.nextLevelPannel.SetActive(true);
+        PauseManager.Instance.Pause();
     }
 
     private void Death()
@@ -134,12 +141,13 @@ public class GameManager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void WriteScore()
+    public string WriteScore()
     {
         string filePath = Application.persistentDataPath + "\\score.txt";
-        string texto = "Score: 100";
+        string texto = "Score: " + Score.ToString() ;
         
         File.WriteAllText(filePath, texto);
+        return filePath;
     }
 
 }

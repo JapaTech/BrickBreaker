@@ -21,7 +21,8 @@ public class UIManager : MonoBehaviour
 
     public void NextLevel_Btn()
     {
-        GameManager.Instance.LoadLevel(GameManager.Instance.Level);
+        GameManager.Instance.LoadLevel(GameManager.Instance.Level + 1);
+        
     }
 
 }

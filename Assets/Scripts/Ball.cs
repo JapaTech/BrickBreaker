@@ -52,14 +52,15 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(rb.velocity.y == 0)
+        if(Mathf.Abs(rb.velocity.y) < 0.6f && Mathf.Abs(rb.velocity.y) > 0)
         {
-            if (collision.transform.CompareTag("Wall"))
-            {
-                Vector2 force = new Vector2(0, Random.Range(Random.Range(-0.5f, -0.25f), Random.Range(0.25f, 0.5f)));
-
-                rb.AddForce(force.normalized, ForceMode2D.Impulse);
-            }
-        }   
+            Vector2 force = new Vector2(0, rb.velocity.normalized.y * 0.25f);
+            rb.AddForce(force.normalized, ForceMode2D.Impulse);
+        }
+        else if (rb.velocity.y == 0f)
+        {
+            Vector2 force = new Vector2(0, Random.Range(Random.Range(-0.25f, - 0.1f), Random.Range(0.1f, 0.25f)));
+            rb.AddForce(force.normalized, ForceMode2D.Impulse);
+        }
     }
 }
