@@ -3,20 +3,32 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void StartGame()
+    [SerializeField] private GameObject tutorial;
+    [SerializeField] private GameObject exitGame;
+
+    private void Start()
     {
-        SceneManager.sceneLoaded += CreateGameManager;
-        SceneManager.LoadScene($"Level1");
+        Tutorial(false);
+        ExitGame(false);
     }
 
-    private void CreateGameManager(Scene scene, LoadSceneMode mode)
+    public void StartGame()
     {
-        SceneManager.sceneLoaded -= CreateGameManager;
-        GameManager existGameManager = FindAnyObjectByType<GameManager>();
-        if(existGameManager == null)
-        {
-            GameObject gameManager = new GameObject("GameManager");
-            gameManager.AddComponent<GameManager>(); 
-        }
+        SceneManager.LoadScene("Level1");
+    }
+
+    public void Tutorial(bool active)
+    {
+        tutorial.SetActive(active);
+    }
+
+    public void ExitGame(bool active)
+    {
+        exitGame.SetActive(active);
+    }
+
+    public void EndApp()
+    {
+        Application.Quit();
     }
 }
