@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int startHealth;
     [SerializeField] private int maxHealth;
 
+    private bool levelRegistred = false;
     public bool WinGame { get; private set; }
 
     [field: SerializeField]
@@ -46,9 +47,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance !=null && Instance != this)
+        if(Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
         else
         {
@@ -74,6 +75,7 @@ public class GameManager : MonoBehaviour
         bricks.Clear();
         bricks.AddRange(b);
         OnInitialize?.Invoke();
+        Debug.Log("Iniciou" + bricks.Count);
     }
 
     private void OnEnable()
@@ -105,10 +107,17 @@ public class GameManager : MonoBehaviour
         if (level > NumberOfLevels)
         {
             WinGame = true;
+            uiManager.gameObject.SetActive(false);
             SceneManager.LoadScene("GameOver");
+            return;
         }
 
-        SceneManager.sceneLoaded += OnLevelLoaded;
+        if (!levelRegistred)
+        {
+            SceneManager.sceneLoaded += OnLevelLoaded;
+            levelRegistred = true;
+        }
+
         SceneManager.LoadScene($"Level{level}");
         PauseManager.Instance.Unpause();
     }
@@ -117,6 +126,8 @@ public class GameManager : MonoBehaviour
     {
         OnChangeScene?.Invoke();
         SceneManager.sceneLoaded -= OnLevelLoaded;
+        levelRegistred = false;
+        WriteScore();
         Initialize();
     }
 
@@ -139,13 +150,13 @@ public class GameManager : MonoBehaviour
     public void ChangeHealth(int damage)
     {
         Health += damage;
+        uiManager.UpdateHealth(Health);    
 
         if(Health <= 0)
         {
             Death();
-            return;
+            
         }
-        uiManager.UpdateHealth(Health);     
     }
 
     private void Win()
@@ -163,7 +174,7 @@ public class GameManager : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene("MainMenu");
-        Destroy(gameObject);
+        DestroyManagers();
     }
 
     public string WriteScore()
@@ -173,6 +184,13 @@ public class GameManager : MonoBehaviour
         
         File.WriteAllText(filePath, texto);
         return filePath;
+    }
+
+    public void DestroyManagers()
+    {
+        Destroy(gameObject);
+        Destroy(uiManager.gameObject);
+        Destroy(PowerUpManager.Instance.gameObject);
     }
 
 }

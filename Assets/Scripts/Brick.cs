@@ -32,6 +32,9 @@ public class Brick : MonoBehaviour
 
     private void ChangeSprite()
     {
+        if (health == 0)
+            return;
+
         actualSprite.sprite = spritesHealth[health - 1];
     }
 

@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class BallProjectile : Projectile
 {
+    [SerializeField] private SpriteRenderer actualSprite;
+    [SerializeField] private Sprite[] spritesDano;
 
     private void Start()
     {
-        Debug.Log(health);
+        ChangeSprite();
         Movement();
     }
 
@@ -19,7 +21,7 @@ public class BallProjectile : Projectile
         if (collision.gameObject.CompareTag("Player"))
         {
             ChangeHealth(-1);
-            GameManager.Instance.ChangeHealth(damage);
+            GameManager.Instance.ChangeHealth(-damage);
         }
 
         if (collision.gameObject.CompareTag("Death"))
@@ -47,9 +49,23 @@ public class BallProjectile : Projectile
         }
     }
 
+    protected override void ChangeHealth(int value)
+    {
+        base.ChangeHealth(value);
+        ChangeSprite();
+    }
+
+    private void ChangeSprite()
+    {
+        if (health == 0)
+            return;
+
+        actualSprite.sprite = spritesDano[health - 1];
+    }
+
     public override void Movement()
     {
-        Vector2 force = new Vector2(Random.Range(-0.5f, 0.5f), -1f);
+        Vector2 force = new Vector2(Random.Range(-0.8f, 0.8f), -1f);
 
         rb.AddForce(force.normalized * speed, ForceMode2D.Impulse);
     }

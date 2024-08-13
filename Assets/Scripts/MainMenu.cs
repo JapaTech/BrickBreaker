@@ -15,6 +15,10 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("Level1");
+        if(PauseManager.Instance != null)
+        {
+            PauseManager.Instance.Unpause();
+        }
     }
 
     public void Tutorial(bool active)

@@ -1,5 +1,5 @@
 {
-    "name": "Player",
+    "name": "PlayerInput",
     "maps": [
         {
             "name": "Player",
@@ -42,6 +42,39 @@
                     "name": "positive",
                     "id": "daf070eb-2272-4845-8206-ad0baa29c1cd",
                     "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "cd0904db-f1fd-43f7-977f-60499a40af48",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "4a7ca1de-29d3-423e-8bf2-6c7d8b555c5f",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "217fd940-1948-4f00-b685-104026aa5ae3",
+                    "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

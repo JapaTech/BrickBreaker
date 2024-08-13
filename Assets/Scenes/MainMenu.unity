@@ -2932,7 +2932,7 @@ PrefabInstance:
     - target: {fileID: 1264898595785369969, guid: 4d1f55bd7cb1e9c47822b1bad21e65b4, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 7605ffc625457d94789d476d1e631f24, type: 3}
+      objectReference: {fileID: 21300000, guid: 96e0b03de031f9c49b73763c82e1b524, type: 3}
     - target: {fileID: 1756728414395190915, guid: 4d1f55bd7cb1e9c47822b1bad21e65b4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -4280,13 +4280,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
+  m_fontSize: 36
   m_fontSizeBase: 24
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontSizeMax: 36
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535

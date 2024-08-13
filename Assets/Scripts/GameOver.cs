@@ -32,7 +32,6 @@ public class GameOver : MonoBehaviour
 
     public void MainMenu()
     {
-
         GameManager.Instance.MainMenu();
     }
 }

@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
 
     public void UpdateHealth(int current)
     {
+        if (current <= 0)
+            return;
         live.sprite = lives[current - 1];
     }
 

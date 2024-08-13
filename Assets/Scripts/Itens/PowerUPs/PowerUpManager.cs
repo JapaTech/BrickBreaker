@@ -31,7 +31,7 @@ public class PowerUpManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
         else
         {
@@ -123,17 +123,6 @@ public class PowerUpManager : MonoBehaviour
         actualPowerUp.Active();
         deactivePowerUp = StartCoroutine(DeactivePowerUp());
 
-        //StopCoroutine(DeactivePowerUp());
-        //if (IsPowerUPActive)
-        //{
-        //    actualPowerUp.Deactivate();
-        //    actualPowerUp = null;
-        //}
-
-        //IsPowerUPActive = true;
-        //actualPowerUp = powerUPCommand;
-        //actualPowerUp.Active();
-        //StartCoroutine(DeactivePowerUp());
     }
 
     public IEnumerator DeactivePowerUp()
@@ -150,7 +139,10 @@ public class PowerUpManager : MonoBehaviour
     public void EndExecution()
     {
         actualPowerUp = null;
-        StopAllCoroutines();
+        if (deactivePowerUp != null)
+        {
+            StopCoroutine(deactivePowerUp);
+        }
     }
 
 }
