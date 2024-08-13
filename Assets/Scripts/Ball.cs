@@ -19,13 +19,7 @@ public class Ball : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.Instance.OnLoseBall += ResetBall;
         GameEvents.BallSpawned(this);
-    }
-
-    private void OnDisable()
-    {
-        GameManager.Instance.OnLoseBall -= ResetBall;  
     }
 
     void Start()
@@ -41,11 +35,11 @@ public class Ball : MonoBehaviour
         //Debug.Log(rb.velocity);
     }
 
-    public void ResetBall()
+    public void SetBallDefautl()
     {
+        tr.position = startPos;
         rb.velocity = Vector2.zero;
         Invoke(nameof(AddRandomTrajectory), 2f);
-        tr.position = startPos;
     }
 
     private void AddRandomTrajectory()
@@ -60,10 +54,11 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.CompareTag("Death"))
         {
             GameManager.Instance.ChangeHealth(-1);
-            GameManager.Instance.LoseBall();
+            SetBallDefautl();
+            return;
         }
 
-        if(Mathf.Abs(rb.velocity.y) <= 0.6f && Mathf.Abs(rb.velocity.y) > 0)
+        if (Mathf.Abs(rb.velocity.y) <= 0.6f && Mathf.Abs(rb.velocity.y) > 0)
         {
             Vector2 force = new Vector2(0, rb.velocity.normalized.y * 0.3f);
             rb.AddForce(force.normalized, ForceMode2D.Impulse);
@@ -83,5 +78,6 @@ public class Ball : MonoBehaviour
 
             Debug.Log("Chamou");
         }
+        
     }
 }

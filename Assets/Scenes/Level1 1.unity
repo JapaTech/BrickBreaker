@@ -507,7 +507,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!114 &286243609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -973,11 +973,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053eb69bedf85ea48bf879fdd36ed88f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 286243609}
   powerUpDuration: 20
   newWidth: 1
   newPlayerSpeed: 10
   newBallSize: 1.5
+  newBallDamage: 2
   powerUPsToSpawn:
   - {fileID: 3693971325141802107, guid: df1941d4fc4269e4382258525850a161, type: 3}
   - {fileID: 979687339097257280, guid: 619aecc0829d7f9468c9a906005d4ab1, type: 3}
@@ -1347,7 +1347,7 @@ Transform:
   m_GameObject: {fileID: 1010165588}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4.72, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3210,6 +3210,67 @@ Transform:
   - {fileID: 1675932233}
   m_Father: {fileID: 1865185789352826234}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &5471650023831077028
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 210022157628324369, guid: c339e5945c2d3974799d64a0c9a29cd3, type: 3}
+      propertyPath: m_Name
+      value: BallProjectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 210022157628324369, guid: c339e5945c2d3974799d64a0c9a29cd3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629565008790970986, guid: c339e5945c2d3974799d64a0c9a29cd3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.7186174
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629565008790970986, guid: c339e5945c2d3974799d64a0c9a29cd3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.4585308
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629565008790970986, guid: c339e5945c2d3974799d64a0c9a29cd3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.055115506
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629565008790970986, guid: c339e5945c2d3974799d64a0c9a29cd3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629565008790970986, guid: c339e5945c2d3974799d64a0c9a29cd3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629565008790970986, guid: c339e5945c2d3974799d64a0c9a29cd3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629565008790970986, guid: c339e5945c2d3974799d64a0c9a29cd3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629565008790970986, guid: c339e5945c2d3974799d64a0c9a29cd3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629565008790970986, guid: c339e5945c2d3974799d64a0c9a29cd3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629565008790970986, guid: c339e5945c2d3974799d64a0c9a29cd3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c339e5945c2d3974799d64a0c9a29cd3, type: 3}
 --- !u!61 &8135818522726676298
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3292,7 +3353,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a50ab91c0ddc9774cacbf3f2a38c6b14, type: 3}
   chanceDropPowerUp: 0.8
   <Points>k__BackingField: 100
-  projctilePrefab: {fileID: 6437468633060575054, guid: 7249fe139db67784dae236b92cd44a36, type: 3}
+  projctilePrefab: {fileID: 7394733489089374745, guid: c339e5945c2d3974799d64a0c9a29cd3, type: 3}
   shootPoint: {fileID: 1675932233}
   attackRate: 5
 --- !u!1660057539 &9223372036854775807
@@ -3309,3 +3370,4 @@ SceneRoots:
   - {fileID: 677905004}
   - {fileID: 1258448954}
   - {fileID: 834789798}
+  - {fileID: 5471650023831077028}

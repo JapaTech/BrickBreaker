@@ -507,7 +507,7 @@ GameObject:
   - component: {fileID: 286243609}
   - component: {fileID: 286243608}
   - component: {fileID: 286243607}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ball
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -1533,12 +1533,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053eb69bedf85ea48bf879fdd36ed88f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1081434513}
-  ball: {fileID: 286243609}
   powerUpDuration: 20
   newWidth: 1
   newPlayerSpeed: 10
   newBallSize: 1.5
+  newBallDamage: 2
   powerUPsToSpawn:
   - {fileID: 3693971325141802107, guid: df1941d4fc4269e4382258525850a161, type: 3}
   - {fileID: 979687339097257280, guid: 619aecc0829d7f9468c9a906005d4ab1, type: 3}
@@ -3240,7 +3239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1352211709}
   - component: {fileID: 1352211710}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5120,7 +5119,7 @@ GameObject:
   - component: {fileID: 2110042764}
   m_Layer: 0
   m_Name: WallSouth_DeathZone
-  m_TagString: Untagged
+  m_TagString: Death
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

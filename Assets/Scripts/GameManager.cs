@@ -7,6 +7,8 @@ using System.IO;
 [DefaultExecutionOrder(-2)]
 public class GameManager : MonoBehaviour
 {
+    public Player PlayerRef { get; private set; }
+    public Ball BallRef { get; private set; }
 
     public int Score { get; private set; }
 
@@ -32,7 +34,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public Action OnLoseBall;
+    public Action OnInitialize;
+    public Action OnChangeScene;
 
     private List<Brick> bricks = new List<Brick>();
 
@@ -67,9 +70,32 @@ public class GameManager : MonoBehaviour
         uiManager.nextLevelPannel.SetActive(false);
         uiManager.UpdateHealth(maxHealth);
         uiManager.UpdateScore(Score);
-        Brick[] b = FindObjectsByType<Brick>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        Brick[] b = FindObjectsByType<Brick>(FindObjectsSortMode.None);
         bricks.Clear();
         bricks.AddRange(b);
+        OnInitialize?.Invoke();
+    }
+
+    private void OnEnable()
+    {
+        GameEvents.OnPlayerSpawn += SetPlayer;
+        GameEvents.OnBallSpawn += SetBall;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.OnPlayerSpawn -= SetPlayer;
+        GameEvents.OnBallSpawn -= SetBall;
+    }
+
+    private void SetPlayer(Player player)
+    {
+        PlayerRef = player;
+    }
+
+    private void SetBall(Ball ball)
+    {
+        BallRef = ball;
     }
 
     public void LoadLevel(int level)
@@ -89,6 +115,7 @@ public class GameManager : MonoBehaviour
 
     private void OnLevelLoaded(Scene scene, LoadSceneMode mode)
     {
+        OnChangeScene?.Invoke();
         SceneManager.sceneLoaded -= OnLevelLoaded;
         Initialize();
     }
@@ -119,11 +146,6 @@ public class GameManager : MonoBehaviour
             return;
         }
         uiManager.UpdateHealth(Health);     
-    }
-
-    public void LoseBall()
-    {
-        OnLoseBall?.Invoke();
     }
 
     private void Win()

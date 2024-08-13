@@ -5,9 +5,6 @@ using UnityEngine;
 [DefaultExecutionOrder(-1)]
 public class PowerUpManager : MonoBehaviour
 {
-    [SerializeField] public Player player { get; private set; }
-    [SerializeField] Ball ball;
-
     public static PowerUpManager Instance { get; set; }
 
     public bool IsPowerUPActive { get; private set; }
@@ -17,6 +14,7 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] private float newWidth;
     [SerializeField] private float newPlayerSpeed;
     [SerializeField] private float newBallSize;
+    [SerializeField] private int newBallDamage = 2;
 
     private IPowerUp actualPowerUp;
 
@@ -26,6 +24,8 @@ public class PowerUpManager : MonoBehaviour
 
     [SerializeField] private PowerUPItem[] powerUPsToSpawn;
     [SerializeField] private RestoreLife restoreLife;
+
+    private Coroutine deactivePowerUp;
 
     private void Awake()
     {
@@ -42,29 +42,34 @@ public class PowerUpManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvents.OnPlayerSpawn += ConfigurePlayerPowerUps;
-        GameEvents.OnBallSpawn += ConfigureBallPowerUps;
+        GameManager.Instance.OnChangeScene += EndExecution;
+        GameManager.Instance.OnInitialize += ConfigureBallPowerUps;
+        GameManager.Instance.OnInitialize += ConfigurePlayerPowerUps;
     }
 
     private void OnDisable()
     {
-        GameEvents.OnPlayerSpawn -= ConfigurePlayerPowerUps;
-        GameEvents.OnBallSpawn -= ConfigureBallPowerUps;
+        GameManager.Instance.OnInitialize -= ConfigureBallPowerUps;
+        GameManager.Instance.OnInitialize -= ConfigurePlayerPowerUps;
+        GameManager.Instance.OnChangeScene -= EndExecution;
+    }
+
+    private void Start()
+    {
+        ConfigurePlayerPowerUps();
+        ConfigureBallPowerUps();
+    }
+
+    public void ConfigurePlayerPowerUps()
+    {
+        paddleSizePowerUp = new PaddleSizePowerUp(newWidth, GameManager.Instance.PlayerRef) ;
+        paddleSpeedPowerUp = new PaddleSpeedPowerUP(newPlayerSpeed, GameManager.Instance.PlayerRef);
         
     }
 
-    public void ConfigurePlayerPowerUps(Player player)
+    public void ConfigureBallPowerUps()
     {
-        this.player = player;
-        paddleSizePowerUp = new PaddleSizePowerUp(newWidth, this.player);
-        paddleSpeedPowerUp = new PaddleSpeedPowerUP(newPlayerSpeed, this.player);
-        
-    }
-
-    public void ConfigureBallPowerUps(Ball ball)
-    {
-        this.ball = ball;
-        ballSizePowerUp = new BallSizePowerUp(newBallSize, this.ball, 2);
+        ballSizePowerUp = new BallSizePowerUp(newBallSize, GameManager.Instance.BallRef, newBallDamage);
     }
 
     public void SpawnPowerUp(Vector3 pos)
@@ -102,23 +107,50 @@ public class PowerUpManager : MonoBehaviour
 
     public void ActivePowerUp(IPowerUp powerUPCommand)
     {
+        if(deactivePowerUp != null)
+        {
+            StopCoroutine(deactivePowerUp);
+        }
+
         if (IsPowerUPActive)
         {
-            StopCoroutine(DeactivePowerUp());
             actualPowerUp.Deactivate();
+            actualPowerUp = null;
         }
 
         IsPowerUPActive = true;
         actualPowerUp = powerUPCommand;
         actualPowerUp.Active();
-        StartCoroutine(DeactivePowerUp());
+        deactivePowerUp = StartCoroutine(DeactivePowerUp());
+
+        //StopCoroutine(DeactivePowerUp());
+        //if (IsPowerUPActive)
+        //{
+        //    actualPowerUp.Deactivate();
+        //    actualPowerUp = null;
+        //}
+
+        //IsPowerUPActive = true;
+        //actualPowerUp = powerUPCommand;
+        //actualPowerUp.Active();
+        //StartCoroutine(DeactivePowerUp());
     }
 
     public IEnumerator DeactivePowerUp()
     {
         yield return new WaitForSeconds(powerUpDuration);
-        actualPowerUp.Deactivate();
+        if(actualPowerUp != null)
+        {
+            actualPowerUp.Deactivate();
+            actualPowerUp = null;
+        }
         IsPowerUPActive = false;
+    }
+
+    public void EndExecution()
+    {
+        actualPowerUp = null;
+        StopAllCoroutines();
     }
 
 }

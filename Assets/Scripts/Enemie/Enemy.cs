@@ -30,7 +30,7 @@ public class Enemy : Brick, Attack
 
         if(projectile is TargetProjectile)
         {
-            projectile.Movement(PowerUpManager.Instance.player.transform);
+            projectile.Movement(GameManager.Instance.PlayerRef.transform);
         }
     }
 
