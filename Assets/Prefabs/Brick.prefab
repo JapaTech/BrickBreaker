@@ -138,6 +138,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 707802fc9ece32d428d2c7f298c6dc13, type: 3}
   - {fileID: 21300000, guid: f0996ece01a48c74291a3e405fa3702f, type: 3}
   - {fileID: 21300000, guid: 4354c05ef62992f4f91b05e0da37f262, type: 3}
+  chanceDropPowerUp: 0
   <Points>k__BackingField: 100
 --- !u!61 &7220190313595325548
 BoxCollider2D:
@@ -182,5 +183,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.944046, y: 0.67502975}
+  m_Size: {x: 2, y: 0.75}
   m_EdgeRadius: 0

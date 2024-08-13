@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-1)]
 public class PowerUpManager : MonoBehaviour
 {
     [SerializeField] Player player;
@@ -10,8 +11,6 @@ public class PowerUpManager : MonoBehaviour
     public static PowerUpManager Instance { get; set; }
 
     public bool IsPowerUPActive { get; private set; }
-
-    private bool powerUPonScreen;
 
     [SerializeField] private float powerUpDuration = 30f;
 
@@ -39,11 +38,37 @@ public class PowerUpManager : MonoBehaviour
             DontDestroyOnLoad(this);
         }
     }
+
+    private void OnEnable()
+    {
+        GameEvents.OnPlayerSpawn += ConfigurePlayerPowerUps;
+        GameEvents.OnBallSpawn += ConfigureBallPowerUps;
+    }
+
     private void Start()
     {
-        paddleSizePowerUp = new PaddleSizePowerUp(newWidth, player);
-        paddleSpeedPowerUp = new PaddleSpeedPowerUP(newPlayerSpeed, player);
-        ballSizePowerUp = new BallSizePowerUp(newBallSize, ball);
+        
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.OnPlayerSpawn -= ConfigurePlayerPowerUps;
+        GameEvents.OnBallSpawn -= ConfigureBallPowerUps;
+        
+    }
+
+    public void ConfigurePlayerPowerUps(Player player)
+    {
+        this.player = player;
+        paddleSizePowerUp = new PaddleSizePowerUp(newWidth, this.player);
+        paddleSpeedPowerUp = new PaddleSpeedPowerUP(newPlayerSpeed, this.player);
+        
+    }
+
+    public void ConfigureBallPowerUps(Ball ball)
+    {
+        this.ball = ball;
+        ballSizePowerUp = new BallSizePowerUp(newBallSize, this.ball, 2);
     }
 
     public void SpawnPowerUp(Vector3 pos)

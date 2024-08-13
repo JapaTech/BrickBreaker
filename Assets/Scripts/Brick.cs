@@ -51,7 +51,7 @@ public class Brick : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ball"))
         {
-            TakeDamage(1);
+            TakeDamage(collision.gameObject.GetComponent<Ball>().Damage);
         }
     }
 }
