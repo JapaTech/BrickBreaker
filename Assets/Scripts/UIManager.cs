@@ -9,6 +9,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text score;
     [field: SerializeField] public GameObject nextLevelPannel { get; private set; }
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     public void UpdateHealth(int current)
     {
         live.sprite = lives[current - 1];

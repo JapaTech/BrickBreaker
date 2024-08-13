@@ -43,6 +43,9 @@ public class PowerUPItem : MonoBehaviour
                 default:
                     break;
             }
+        }
+        if (collision.gameObject.CompareTag("Death"))
+        {
             gameObject.SetActive(false);
         }
     }
