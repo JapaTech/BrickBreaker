@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -26,25 +24,17 @@ public class Player : MonoBehaviour
         posInicial = tr.position;
     }
 
-    private void Start()
-    {
-        
-    }
-
     private void OnEnable()
     {
         playerInput.Player.Enable();
         GameEvents.PlayerSpawned(this);
     }
 
-    private void OnDisable()
-    {
-       
-    }
 
     private void Update()
     {
         inputValue = playerInput.Player.Move.ReadValue<float>();
+        
     }
 
     private void FixedUpdate()

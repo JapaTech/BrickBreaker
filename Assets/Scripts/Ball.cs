@@ -35,10 +35,19 @@ public class Ball : MonoBehaviour
         Invoke(nameof(AddRandomTrajectory), 1.5f);
     }
 
+    private void Update()
+    {
+        if (UnityEngine.InputSystem.Keyboard.current.tKey.wasPressedThisFrame)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            Debug.Log("Press");
+        }
+    }
+
     private void FixedUpdate()
     {
         rb.velocity = rb.velocity.normalized * speed;
-        Debug.Log(rb.velocity);
+        //Debug.Log(rb.velocity);
     }
 
     public void ResetBall()
@@ -64,8 +73,18 @@ public class Ball : MonoBehaviour
         }
         else if (rb.velocity.y == 0f)
         {
-            Vector2 force = new Vector2(0,  0.3f);
-            rb.AddForce(force.normalized, ForceMode2D.Impulse);
+            if(transform.position.y <= 0)
+            {
+                Vector2 force = new Vector2(1, 3f);
+                rb.AddForce(force.normalized, ForceMode2D.Impulse);
+            }
+            else
+            {
+                Vector2 force = new Vector2(1, -3f);
+                rb.AddForce(force.normalized, ForceMode2D.Impulse);
+            }
+
+            Debug.Log("Chamou");
         }
     }
 }

@@ -8,7 +8,11 @@ public class DeathZone : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ball"))
         {
-            GameManager.Instance.TakeDamage(1);
+            GameManager.Instance.ChangeHealth(-1);
+        }
+        if (collision.gameObject.CompareTag("Item"))
+        {
+            collision.gameObject.SetActive(false);
         }
     }
 }

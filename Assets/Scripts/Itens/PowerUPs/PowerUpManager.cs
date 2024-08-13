@@ -18,13 +18,14 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] private float newPlayerSpeed;
     [SerializeField] private float newBallSize;
 
-    IPowerUp actualPowerUp;
+    private IPowerUp actualPowerUp;
 
-    PaddleSizePowerUp paddleSizePowerUp;
-    PaddleSpeedPowerUP paddleSpeedPowerUp;
-    BallSizePowerUp ballSizePowerUp;
+    private PaddleSizePowerUp paddleSizePowerUp;
+    private PaddleSpeedPowerUP paddleSpeedPowerUp;
+    private BallSizePowerUp ballSizePowerUp;
 
-    [SerializeField] PowerUPItem[] powerUPsToSpawn;
+    [SerializeField] private PowerUPItem[] powerUPsToSpawn;
+    [SerializeField] private RestoreLife restoreLife;
 
     private void Awake()
     {
@@ -43,11 +44,6 @@ public class PowerUpManager : MonoBehaviour
     {
         GameEvents.OnPlayerSpawn += ConfigurePlayerPowerUps;
         GameEvents.OnBallSpawn += ConfigureBallPowerUps;
-    }
-
-    private void Start()
-    {
-        
     }
 
     private void OnDisable()
@@ -72,8 +68,21 @@ public class PowerUpManager : MonoBehaviour
     }
 
     public void SpawnPowerUp(Vector3 pos)
-    {       
-        PowerUPItem newPowerUP = Instantiate(powerUPsToSpawn[Random.Range(0, powerUPsToSpawn.Length)], pos, Quaternion.identity);
+    {
+        float rand = Random.value;
+        {
+            if(rand <= 0.4)
+            {
+                RestoreLife rl = Instantiate(restoreLife, pos, Quaternion.identity);
+
+            }
+            else
+            {
+                PowerUPItem newPowerUP = Instantiate(powerUPsToSpawn[Random.Range(0, powerUPsToSpawn.Length)], pos, Quaternion.identity);
+
+            }
+        }
+
     }
 
     public void SizePowerUP()

@@ -109,18 +109,21 @@ public class GameManager : MonoBehaviour
         uiManager.UpdateScore(Score);
     }
 
-    public void TakeDamage(int damage)
+    public void ChangeHealth(int damage)
     {
-        Health -= damage;
-        OnLoseHealth?.Invoke();
+        Health += damage;
+
+        if(damage < 0)
+        {
+            OnLoseHealth?.Invoke();
+        }
 
         if(Health <= 0)
         {
             Death();
             return;
         }
-        uiManager.UpdateHealth(Health);
-        
+        uiManager.UpdateHealth(Health);     
     }
 
     private void Win()
