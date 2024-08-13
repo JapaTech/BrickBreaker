@@ -9,9 +9,19 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text score;
     [field: SerializeField] public GameObject nextLevelPannel { get; private set; }
 
+    public static UIManager Instance { get; set; }
+
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     public void UpdateHealth(int current)

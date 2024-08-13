@@ -10,10 +10,13 @@ public class Ball : MonoBehaviour
     [SerializeField] private int startDamage;
     [field: SerializeField] public int Damage { get; set; } = 1;
 
+    private AudioSource ballAudio;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         tr = transform;
+        ballAudio = GetComponent<AudioSource>();
         startPos = tr.position;
     }
 
@@ -51,10 +54,14 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        ballAudio.pitch = Random.Range(0.8f, 1.21f);
+        ballAudio.Play();
+
         if (collision.gameObject.CompareTag("Death"))
         {
             GameManager.Instance.ChangeHealth(-1);
             SetBallDefautl();
+            rb.velocity = Vector2.zero;
             return;
         }
 
@@ -76,7 +83,7 @@ public class Ball : MonoBehaviour
                 rb.AddForce(force.normalized, ForceMode2D.Impulse);
             }
 
-            Debug.Log("Chamou");
+            //Debug.Log("Chamou");
         }
         
     }

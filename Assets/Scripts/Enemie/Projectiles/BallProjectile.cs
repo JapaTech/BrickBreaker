@@ -47,6 +47,11 @@ public class BallProjectile : Projectile
                 rb.AddForce(force.normalized, ForceMode2D.Impulse);
             }
         }
+        else if (rb.velocity.x == 0f)
+        {
+            Vector2 force = new Vector2(Random.Range(-3, 3), 0);
+            rb.AddForce(force.normalized, ForceMode2D.Impulse);
+        }
     }
 
     protected override void ChangeHealth(int value)
