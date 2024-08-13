@@ -5,7 +5,7 @@ using UnityEngine;
 [DefaultExecutionOrder(-1)]
 public class PowerUpManager : MonoBehaviour
 {
-    [SerializeField] Player player;
+    [SerializeField] public Player player { get; private set; }
     [SerializeField] Ball ball;
 
     public static PowerUpManager Instance { get; set; }

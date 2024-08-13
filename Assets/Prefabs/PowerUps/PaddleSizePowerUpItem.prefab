@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 979687339097257280}
   - component: {fileID: 8398213276464631912}
   - component: {fileID: 8182174966219170141}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PaddleSizePowerUpItem
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7487247896536594255}
   - component: {fileID: 4164850112002347364}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: arrow_horizontal
   m_TagString: Untagged
   m_Icon: {fileID: 0}

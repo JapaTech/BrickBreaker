@@ -19,14 +19,13 @@ public class Ball : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.Instance.OnLoseHealth += ResetBall;
+        GameManager.Instance.OnLoseBall += ResetBall;
         GameEvents.BallSpawned(this);
     }
 
     private void OnDisable()
     {
-        GameManager.Instance.OnLoseHealth -= ResetBall;
-        
+        GameManager.Instance.OnLoseBall -= ResetBall;  
     }
 
     void Start()
@@ -35,14 +34,6 @@ public class Ball : MonoBehaviour
         Invoke(nameof(AddRandomTrajectory), 1.5f);
     }
 
-    private void Update()
-    {
-        if (UnityEngine.InputSystem.Keyboard.current.tKey.wasPressedThisFrame)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, 0);
-            Debug.Log("Press");
-        }
-    }
 
     private void FixedUpdate()
     {
@@ -66,6 +57,12 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag("Death"))
+        {
+            GameManager.Instance.ChangeHealth(-1);
+            GameManager.Instance.LoseBall();
+        }
+
         if(Mathf.Abs(rb.velocity.y) <= 0.6f && Mathf.Abs(rb.velocity.y) > 0)
         {
             Vector2 force = new Vector2(0, rb.velocity.normalized.y * 0.3f);

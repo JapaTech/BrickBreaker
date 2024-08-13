@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7265734683911089301}
   - component: {fileID: 1900722477344491545}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: card_outline_lift
   m_TagString: Untagged
   m_Icon: {fileID: 0}

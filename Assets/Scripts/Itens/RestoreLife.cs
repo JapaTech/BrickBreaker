@@ -25,5 +25,9 @@ public class RestoreLife : MonoBehaviour
             GameManager.Instance.ChangeHealth(amount);
             gameObject.SetActive(false);
         }
+        if (collision.CompareTag("Death"))
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

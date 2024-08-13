@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public Action OnLoseHealth;
+    public Action OnLoseBall;
 
     private List<Brick> bricks = new List<Brick>();
 
@@ -113,17 +113,17 @@ public class GameManager : MonoBehaviour
     {
         Health += damage;
 
-        if(damage < 0)
-        {
-            OnLoseHealth?.Invoke();
-        }
-
         if(Health <= 0)
         {
             Death();
             return;
         }
         uiManager.UpdateHealth(Health);     
+    }
+
+    public void LoseBall()
+    {
+        OnLoseBall?.Invoke();
     }
 
     private void Win()

@@ -7,16 +7,18 @@ TagManager:
   - Ball
   - Wall
   - Item
+  - EnemyShoot
+  - Death
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ball
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Bricks
+  - EnemyShoot
+  - Item
   - 
   - 
   - 
