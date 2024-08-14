@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
+    //Criação do singleton
     public static PauseManager Instance { get; set; }
 
     private void Awake()
@@ -19,14 +18,17 @@ public class PauseManager : MonoBehaviour
         }
     }
 
+    //Variável que fala se o jogo está pausada ou não
     public bool Paused { get; private set; }
 
+    //Pausa o jogo deixando o tempo da física em 0
     public void Pause()
     {
         Paused = true;
         Time.timeScale = 0;
     }
 
+    //Tira o jogo do pause e retorna o tempo da física dele para 1
     public void Unpause()
     {
         Paused = false;

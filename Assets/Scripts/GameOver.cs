@@ -3,33 +3,39 @@ using TMPro;
 
 public class GameOver : MonoBehaviour
 {
-    [SerializeField] private TMP_Text endMessage;
-    [SerializeField] private TMP_Text saveMessage;
+    //Texto do game over
+    [SerializeField] private TMP_Text gameOVerMessage;
+    //Texto que mostra o jogador o caminho do arquivo de salavamento
+    [SerializeField] private TMP_Text saveScoreMessage;
 
+    //Menagem de quando o jogador passar todas as fases
     [TextArea]
     [SerializeField] string winMessage;
 
+    //Menagem de quando o jogador perdeu
     [TextArea]
     [SerializeField] string tryAginMessage;
 
     private void Start()
     {
         ShowMessage();
-        saveMessage.text = "Seu progresso foi salvo no " + GameManager.Instance.WriteScore();
+        saveScoreMessage.text = "Seu progresso foi salvo no " + GameManager.Instance.WriteScore();
     }
 
+    //Troca a mensagem de final do jogo a depender se o player ganhou ou não
     public void ShowMessage()
     {
         if (GameManager.Instance.WinGame == true)
         {
-            endMessage.text = winMessage + $" Sua pontuação final foi de: {GameManager.Instance.Score}";
+            gameOVerMessage.text = winMessage + $" Sua pontuação final foi de: {GameManager.Instance.Score}";
         }
         else
         {
-            endMessage.text = tryAginMessage + $" Sua pontuação final foi de: {GameManager.Instance.Score}";
+            gameOVerMessage.text = tryAginMessage + $" Sua pontuação final foi de: {GameManager.Instance.Score}";
         }
     }
 
+    //Volta para o menu inicial
     public void MainMenu()
     {
         GameManager.Instance.MainMenu();

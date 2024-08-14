@@ -1,5 +1,4 @@
-using UnityEngine;
-
+//Interface do power-up
 public interface IPowerUp
 {
     public void Active();

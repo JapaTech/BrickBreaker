@@ -1,19 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class ActivePowerUP
+//Não utilizado, era tipo o invoker do power-up, mas não era necessário
+public class ActivePowerUp
 {
-
     private IPowerUp powerUPCommand;
 
-    public void ActivePowerUp(IPowerUp powerUP)
+    public void Active(IPowerUp powerUP)
     {
         powerUPCommand = powerUP;
         powerUPCommand.Active();
     }
 
-    public void DisablePowerUp()
+    public void Deactive()
     {
         powerUPCommand.Deactivate();
         powerUPCommand = null;

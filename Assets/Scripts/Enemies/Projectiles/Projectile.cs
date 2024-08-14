@@ -1,11 +1,16 @@
-using System;
 using UnityEngine;
 
+//Classe abstrata base para o projétil
 public abstract class Projectile : MonoBehaviour
 {
+    //Velocidade que o projétil viaja
     [SerializeField] protected float speed;
+    //Vida do projétil
     [SerializeField] protected int health;
+    //Dano que o projétil causa
     [SerializeField] protected int damage;
+
+    //Referêcuna de componentes
     protected Rigidbody2D rb;
     protected Transform tr;
     [HideInInspector] public Enemy creator;
@@ -16,13 +21,15 @@ public abstract class Projectile : MonoBehaviour
         tr = transform;
     }
 
+    //Move o projétil
     public abstract void Movement();
     public abstract void Movement(Transform target);
 
+    //Atualiza a vida do projétil
     protected virtual void ChangeHealth(int value)
     {
         health += value;
-        Debug.Log("Função abstrata" + health);
+
         if(health <= 0)
         {
             health = 0;
@@ -30,13 +37,15 @@ public abstract class Projectile : MonoBehaviour
         }
     }
 
+    //Desativa o projétil
     protected virtual void Death()
     {
         GameEvents.ProjectileDeath(this);
-        Debug.Log("Quem me chamou");
+        
         gameObject.SetActive(false);
     }
 
+    //Define quem foi que criou esse projétil
     public bool IsCreatedByEnemy(Enemy enemy)
     {
         return enemy == creator ;
