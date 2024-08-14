@@ -34,7 +34,7 @@ public class PowerUPItem : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             itemAudio.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
-            AudioSource.PlayClipAtPoint(itemAudio.clip, playAudioAtPoint);
+            AudioSource.PlayClipAtPoint(itemAudio.clip, playAudioAtPoint, 1f);
             switch (powerUp)
             {
                 case PowerUP.PaddleSize:

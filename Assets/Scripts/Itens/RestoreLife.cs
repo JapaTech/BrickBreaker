@@ -5,12 +5,16 @@ using UnityEngine;
 public class RestoreLife : MonoBehaviour
 {
     [SerializeField] private int amount =1;
-    [SerializeField] Vector2 fallSpeed;
-    Rigidbody2D rb;
+    [SerializeField] private Vector2 fallSpeed;
+    private Rigidbody2D rb;
+    private AudioSource restoreAudio;
+    private Vector3 playAudioAtPoint;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        restoreAudio = GetComponent<AudioSource>();
+        playAudioAtPoint = new Vector3(transform.position.x, transform.position.y, Camera.main.transform.position.z);
     }
 
     private void FixedUpdate()
@@ -22,6 +26,8 @@ public class RestoreLife : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            restoreAudio.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+            AudioSource.PlayClipAtPoint(restoreAudio.clip, playAudioAtPoint, 1f);
             GameManager.Instance.ChangeHealth(amount);
             gameObject.SetActive(false);
         }
