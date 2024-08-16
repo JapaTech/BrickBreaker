@@ -1448,6 +1448,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5975806923285919198, guid: 04e37cc4bb0641749b94e121023bdaee, type: 3}
   m_PrefabInstance: {fileID: 1059140141}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1173508241 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1896154033358578001, guid: 37944bf48d2b9cd4895a833490405b0c, type: 3}
+  m_PrefabInstance: {fileID: 3980623012470633067}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1182039491
 GameObject:
   m_ObjectHideFlags: 0
@@ -2747,6 +2752,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4115153360582935365, guid: 37944bf48d2b9cd4895a833490405b0c, type: 3}
+      propertyPath: <NextLevelPannel>k__BackingField
+      value: 
+      objectReference: {fileID: 1173508241}
     - target: {fileID: 4255385054809832790, guid: 37944bf48d2b9cd4895a833490405b0c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

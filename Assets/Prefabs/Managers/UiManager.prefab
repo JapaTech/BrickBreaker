@@ -1079,7 +1079,7 @@ MonoBehaviour:
   - {fileID: -129367188, guid: 59553c385fb264442a96c1855cf772e9, type: 3}
   live: {fileID: 5043844685249671379}
   score: {fileID: 4580904574878019534}
-  <nextLevelPannel>k__BackingField: {fileID: 1896154033358578001}
+  <NextLevelPannel>k__BackingField: {fileID: 1896154033358578001}
 --- !u!1 &5629291472938231053
 GameObject:
   m_ObjectHideFlags: 0
