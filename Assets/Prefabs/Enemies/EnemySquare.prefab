@@ -261,16 +261,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb4fedd3d6915e446996b5788e9659e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  brickData: {fileID: 11400000, guid: 774e69a88faa9954480608ee0c79809c, type: 2}
   actualSprite: {fileID: 6197184219436025085}
-  spritesHealth:
-  - {fileID: 21300000, guid: 9126f3c76c48441409d9458b47124fc1, type: 3}
-  - {fileID: 21300000, guid: 560f29134a2ec934585cebea0b319fcf, type: 3}
-  - {fileID: 21300000, guid: a50ab91c0ddc9774cacbf3f2a38c6b14, type: 3}
-  - {fileID: 21300000, guid: 0022d0b0e571b6a40b29fa4c53967dc7, type: 3}
-  - {fileID: 21300000, guid: 1a528896005700f43853fa39f9c52eec, type: 3}
-  chanceDropPowerUp: 0
-  <Points>k__BackingField: 800
   projctilePrefab: {fileID: 75088952579072320, guid: 6a251092db3ec7a41bc543fda8510f95, type: 3}
   shootPoint: {fileID: 7211495617623903558}
   attackRate: 5

@@ -53,6 +53,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5996356490354937444, guid: acd03676b39dda142afed7609ede147f, type: 3}
+      propertyPath: brickData
+      value: 
+      objectReference: {fileID: 11400000, guid: d0f28c5ef116b054e90e5fc654ec797e, type: 2}
+    - target: {fileID: 5996356490354937444, guid: acd03676b39dda142afed7609ede147f, type: 3}
       propertyPath: chanceDropPowerUp
       value: 0.25
       objectReference: {fileID: 0}

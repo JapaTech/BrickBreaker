@@ -2,22 +2,18 @@ using UnityEngine;
 
 public class Brick : MonoBehaviour
 {
-    //Referências de componentes
-    [SerializeField] private SpriteRenderer actualSprite;
-    [SerializeField] private Sprite[] spritesHealth;
-    
+    [SerializeField] private Brick_GO brickData;   
+
     //Vida do bloco
-    [SerializeField] private int health = 1;
-
-    //Chace que o bloco tem de de dropar um power up ao ser destruído
-    [SerializeField] private float chanceDropPowerUp;
-
-    //Propriedade dos pontos que o bloco irá adioncar a pontuação do jogador
-    [field: SerializeField] public int Points { get; private set; } = 100;
+    private int health = 1;
+    [SerializeField] private SpriteRenderer actualSprite;
+    public int Points { get; private set; }
 
 
     private void Start()
     {
+        health = brickData.healthStart;
+        Points = brickData.points;
         ChangeSprite();
     }
 
@@ -42,14 +38,14 @@ public class Brick : MonoBehaviour
         if (health <= 0)
             return;
 
-        actualSprite.sprite = spritesHealth[health - 1];
+        actualSprite.sprite = brickData.sprites[health - 1];
     }
 
     //Quando o bloco morre ele avisa ao manager que ele morreu ao manager e tem chance de dropar um powerup da sua posição
     private void Death()
     {
         float dropItem = UnityEngine.Random.value;
-        if(dropItem <= chanceDropPowerUp)
+        if(dropItem <= brickData.dropChance)
         {
             PowerUpManager.Instance.SpawnPowerUp(transform.position) ;
         }
